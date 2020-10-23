@@ -6,21 +6,23 @@ use App\Models\User;
 use DI\Container;
 use DI\Bridge\Slim\Bridge as SlimAppFactory;
 
-require __DIR__ . '/../vendor/autoload.php';
+//require __DIR__ . '/../vendor/autoload.php';
 /* $user = new User;
 
 die();
  */
-$container = new Container();
+//$container = new Container();
 
 
 //AppFactory::setContainer($container);
 
-$settings = require __DIR__ . '/../app/settings.php';
-$settings($container);
+/* $settings = require __DIR__ . '/../app/settings.php';
+$settings($container); */
 
 //$app = AppFactory::create();
-$app = SlimAppFactory::create($container);
+$app = SlimAppFactory::create(new Container);
+
+dd(config('middleware'));
 
 $middleware = require __DIR__ . '/../app/middleware.php';
 $middleware($app);
@@ -35,4 +37,6 @@ $routes($app);
     return $response;
 }); */
 
-$app->run();
+//$app->run();
+
+return $app;
